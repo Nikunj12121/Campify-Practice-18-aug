@@ -7,14 +7,19 @@ const ExpressError = require('./utils/ExpressError');
 const Joi = require('joi');
 const { campgroundSchema,reviewSchema } = require('./schemas.js');
 const Review = require('./models/review');
+const session = require('express-session');
+const flash = require('connect-flash');
 
 const campgrounds = require('./routes/campgrounds');
 const reviews = require('./routes/reviews');
+
+
 
 mongoose.connect('mongodb://localhost:27017/camp3', {
     // useNewUrlParser: true,
     // useCreateIndex: true,
     // useUnifiedTopology: true
+    // useFindAndModify: false,
 
 });
 
@@ -36,12 +41,39 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
 
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.engine('ejs', ejsMate); 
+
+const sessionConfig  = {
+
+    secret: 'thisshouldbeabettersecret',
+    resave: false,
+    saveUninitialized: true,
+    cookie: {
+        expires: Date.now() + 7*24*60*60*1000,
+        maxAge: 7*24*60*60*1000,
+        httpOnly: true,
+
+    }
+
+};
+app.use(session(sessionConfig));
+
+
+app.use(flash());
+
+app.use((req, res, next) => {
+    res.locals.success = req.flash('success');
+    res.locals.error = req.flash('error');
+    next();
+})
+
 
 app.use('/campgrounds', campgrounds);
 
 app.use('/campgrounds/:id/reviews', reviews);
+
 
 
 app.get('/',(req,res)=>{
@@ -61,6 +93,6 @@ app.use((err, req, res, next) => {
     res.status(statusCode).render('error',{err});
 });
 
-app.listen(3000, () => {
+app.listen(3002, () => {
   console.log('Server is running on port 3000');
 });
