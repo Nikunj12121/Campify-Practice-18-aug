@@ -14,8 +14,10 @@ module.exports.renderNewForm = (req, res) => {
 
 module.exports.createCampground = async (req, res, next) => {
     // if (!req.body.campground) throw new ExpressError('Invalid Campground Data', 400);
+   
 
     const campground = new Campground(req.body.campground);
+    campground.image = req.files.map(f => ({ url: f.path, filename: f.filename })); // Store the uploaded images
     campground.author = req.user._id; // Set the author to the logged-in user
     await campground.save();
     req.flash('success', 'Successfully made a new campground!');
