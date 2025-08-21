@@ -92,18 +92,18 @@ const seedDB  = async () => {
             
             description   : 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt, velit cupiditate voluptatem pariatur aliquam alias molestias dolore corrupti iure esse sed atque vel quis, nam impedit maiores. Possimus, placeat neque!',
             price, 
-            image : [
-    {
-      url: 'https://res.cloudinary.com/dk1migr8k/image/upload/v1755712590/Campgrounds/up1rssbxkavszfdlyfoa.jpg',
-      filename: 'Campgrounds/up1rssbxkavszfdlyfoa'
-    
-    },
-    {
-      url: 'https://res.cloudinary.com/dk1migr8k/image/upload/v1755712591/Campgrounds/ud2k67cg36gdych2qloq.jpg',
-      filename: 'Campgrounds/ud2k67cg36gdych2qloq'
-     
-    }
-  ]
+    image: [
+      {
+        url: 'https://res.cloudinary.com/dk1migr8k/image/upload/v1755800744/Campgrounds/xnjtvdedauwsagmn40ml.jpg',
+        filename: 'Campgrounds/xnjtvdedauwsagmn40ml',
+       
+      },
+      {
+        url: 'https://res.cloudinary.com/dk1migr8k/image/upload/v1755800746/Campgrounds/c2dj0dylyrnppk9nymbe.jpg',
+        filename: 'Campgrounds/c2dj0dylyrnppk9nymbe',
+       
+      }
+    ],
 
 
         });
